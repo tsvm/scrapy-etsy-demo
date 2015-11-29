@@ -19,8 +19,14 @@ class EtsySpider(scrapy.Spider):
 
     def parse_item(self, response):
         item = EtsyItem()
+        item['url'] = response.request.url
         item['title'] = response.xpath("//div[@id='listing-page-cart-inner']/h1/span/text()").extract()
         item['description'] = response.xpath("//div[@id='description-text']/text()").extract()
         item['tags'] = response.xpath("//div[@id='tags']/ul/li/a/text()").extract()
+        item['price'] = response.xpath("//span[@id='listing-price']/span/span[@class='currency-value']/text()").extract()
+        item['rating'] = response.xpath("//span[@class='review-rating']/meta[@itemprop='rating']/@content").extract()
+        item['reviews'] = response.xpath("//span[@class='review-rating']/meta[@itemprop='count']/@content").extract()
+        item['treasury_lists'] = response.xpath("//a[@href[contains(., 'treasury/listing/')]]/text()").extract()
+        item['favorites'] = response.xpath("//a[@href[contains(., '/favoriters?')]][1]/text()").extract()
+        item['views'] = response.xpath("//li/text()[contains(., 'views')]").extract()
         yield item
-
