@@ -11,10 +11,12 @@ Please note that this is might not be the best way to run a Scrapy spider. Read 
 ## Run the Example
 
 1. Install Scrapy
+
 Follow the Scrapy [documentation](http://doc.scrapy.org/en/latest/intro/install.html).
 
 2. Open the project
 
 3. Run the spider
+
 Read [How to run Scrapy spider](http://doc.scrapy.org/en/latest/intro/tutorial.html#crawling).
 

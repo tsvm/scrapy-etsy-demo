@@ -4,11 +4,11 @@ from etsydemo.items import EtsyItem
 
 class EtsySpider(scrapy.Spider):
     name = 'etsy'
-    start_urls = ['https://www.etsy.com/c/accessories/belts-and-suspenders/belts']
+    start_urls = ['https://www.etsy.com/search?q=best%20selling%20items']
 
     def parse(self, response):     
         # Follow all category links to find items to parse
-        for href in response.xpath("//a/@href[contains(., '/c/')]"):
+        for href in response.xpath("//a/@href[contains(., '/search/')]"):
             full_url = response.urljoin(href.extract())
             yield scrapy.Request(full_url, callback=self.parse)
         # Follow all product links and parse the items
